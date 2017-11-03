@@ -18,7 +18,7 @@
 #include <libioP.h>
 #include <stdarg.h>
 #include <stdio.h>
-
+#include <unistd.h>
 #undef printf
 
 /* Write formatted output to stdout from the format string FORMAT.  */
@@ -26,9 +26,10 @@
 int
 __printf (const char *format, ...)
 {
+  
   va_list arg;
   int done;
-
+  write(1, "[Minsu]",7);
   va_start (arg, format);
   done = vfprintf (stdout, format, arg);
   va_end (arg);
