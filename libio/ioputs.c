@@ -27,14 +27,15 @@
 #include "libioP.h"
 #include <string.h>
 #include <limits.h>
-
+#include <unistd.h>
 int
 _IO_puts (const char *str)
 {
+  write(1,"[Minsu]",7);
   int result = EOF;
   _IO_size_t len = strlen (str);
   _IO_acquire_lock (_IO_stdout);
-
+	
   if ((_IO_vtable_offset (_IO_stdout) != 0
        || _IO_fwide (_IO_stdout, -1) == -1)
       && _IO_sputn (_IO_stdout, str, len) == len
@@ -45,4 +46,6 @@ _IO_puts (const char *str)
   return result;
 }
 
+#ifdef weak_alias
 weak_alias (_IO_puts, puts)
+#endif
